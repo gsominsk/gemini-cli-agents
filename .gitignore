@@ -1,0 +1,19 @@
+# Block everything
+*
+
+# Allow .gitignore
+!/.gitignore
+
+# Allow core instructions
+!/GEMINI.md
+!/AGENTS.md
+
+# Allow agent infrastructure
+!/agents/
+!/agents/**
+!/skills/
+!/skills/**
+!/policies/
+!/policies/**
+!/memory-bank/
+!/memory-bank/**

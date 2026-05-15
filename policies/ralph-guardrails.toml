@@ -1,0 +1,50 @@
+# Ralph Guardrails - Command Blacklist
+
+# 1. Global restriction for 'rm'
+[[rule]]
+toolName = "run_shell_command"
+commandPrefix = "rm"
+decision = "deny"
+priority = 500
+denyMessage = "The 'rm' command is strictly forbidden for security reasons. Please ask the user to delete files manually if needed."
+
+# 2. Whitelist specific git commands for Ralph
+[[rule]]
+toolName = "run_shell_command"
+subagent = "ralph"
+commandRegex = "^git (log|diff|status)"
+decision = "allow"
+priority = 200
+
+# 3. Allow git commit but ONLY with explicit user confirmation
+[[rule]]
+toolName = "run_shell_command"
+subagent = "ralph"
+commandRegex = "^git commit"
+decision = "ask_user"
+priority = 250
+
+# 4. Deny all other git commands for Ralph (push, branch, etc.)
+[[rule]]
+toolName = "run_shell_command"
+subagent = "ralph"
+commandPrefix = "git"
+decision = "deny"
+priority = 100
+denyMessage = "For agent 'Ralph', only 'log', 'diff', 'status' are allowed, and 'commit' requires your approval. Other operations are restricted."
+
+# 5. Surgical Protocol: Deny 'write_file' for existing documentation files for Ralph
+[[rule]]
+toolName = "write_file"
+subagent = "ralph"
+argsPattern = '.*"file_path":\s*".*(AGENTS\.md|GEMINI\.md|systemPatterns\.md|memory-bank/.*)".*'
+decision = "deny"
+priority = 600
+denyMessage = "Surgical Protocol Violation: Agent 'Ralph' is forbidden from using 'write_file' on existing documentation. Use 'replace' for atomic updates instead."
+
+# 6. Surgical Protocol: Explicitly allow 'replace' for Ralph (lower priority than deny rules if any)
+[[rule]]
+toolName = "replace"
+subagent = "ralph"
+decision = "allow"
+priority = 500
