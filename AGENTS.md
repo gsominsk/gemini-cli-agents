@@ -1,7 +1,7 @@
 # Codebase Knowledge: Gemini CLI Environment
 
 ## General Patterns
-- **Skill Structure**: All skills must be in `~/.gemini/skills/` and follow the `SKILL.md` / `references/` / `templates/` structure.
+- **Skill Structure**: All skills must be in `~/.gemini/skills/` and follow the `SKILL.md` / `references/` / `assets/` structure. Use `assets/` for templates and non-context resources. `references/` is for documentation loaded into context.
 - **Context Preservation**: Always preserve original source files in `references/` before adapting.
 - **Narrative**: Mandatory use of `update_topic` for all complex workflows.
 - **Attribution**: All log entries must use the `[YYYY-MM-DD HH:MM:SS] [AgentName]` format.

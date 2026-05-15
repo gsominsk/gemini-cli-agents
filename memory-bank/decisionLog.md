@@ -21,4 +21,10 @@
 **Rationale**: Using the built-in Gemini CLI `tracker_*` tools reduces friction and eliminates the risk of "state drift" between local JSON files and the CLI's internal state.
 **Implementation Details**: Updated `ralph-loop.sh` to check for open tasks via native CLI queries.
 
+## Decision: Use 'assets/' for Skill Templates and non-context resources
+**Date**: 2026-05-15
+**Agent**: Ralph (Audit by Gemini CLI)
+**Rationale**: Using `templates/` for non-context resources can conflict with some automated skill-processing scripts (like `skill-creator`). Moving templates to `assets/` ensures they remain available for injection without being prematurely loaded into the agent's prompt context as part of the skill's instructions.
+**Implementation Details**: Updated `AGENTS.md` and applied this structure to the `agent-orchestrator` skill.
+
 2026-05-15 12:00:00 - Initialized Decision Log.

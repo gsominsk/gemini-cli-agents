@@ -17,3 +17,6 @@
 !/policies/**
 !/memory-bank/
 !/memory-bank/**
+!/hooks/
+!/hooks/**
+!/settings.json

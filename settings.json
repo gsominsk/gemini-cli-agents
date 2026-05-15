@@ -1,0 +1,38 @@
+{
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    }
+  },
+  "general": {
+    "previewFeatures": true
+  },
+  "mcpServers": {
+    "pencil": {
+      "command": "/Applications/Pencil.app/Contents/Resources/app.asar.unpacked/out/mcp-server-darwin-arm64",
+      "args": [
+        "--app",
+        "desktop"
+      ],
+      "env": {}
+    }
+  },
+  "ide": {
+    "hasSeenNudge": true,
+    "enabled": true
+  },
+  "hooks": {
+    "AfterAgent": [
+      {
+        "name": "Ralph Background Trigger",
+        "command": "/Users/sominskijgeorgij/.gemini/hooks/ralph_trigger.sh"
+      }
+    ],
+    "BeforeAgent": [
+      {
+        "name": "Ralph Status Injector",
+        "command": "/Users/sominskijgeorgij/.gemini/hooks/ralph_status_injector.sh"
+      }
+    ]
+  }
+}

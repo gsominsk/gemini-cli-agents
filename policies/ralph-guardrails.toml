@@ -48,3 +48,11 @@ toolName = "replace"
 subagent = "ralph"
 decision = "allow"
 priority = 500
+
+# 7. Global skill auto-approval for Ralph only
+[[rule]]
+name = "Auto-approve all skills for ralph subagent"
+toolName = "activate_skill"
+subagent = "ralph"
+decision = "allow"
+priority = 100
