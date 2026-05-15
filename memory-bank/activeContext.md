@@ -3,15 +3,15 @@
 Current status of the Gemini CLI environment setup.
 
 ## Current Focus
-- Verification of background Ralph execution using the native Task Tracker.
-- Maintaining the "Native Integration" standard (no legacy JSON trackers).
-- Parallel interaction: User chatting while Ralph works in the background.
+- Verification of the `gemini-cli-agents` repository on GitHub.
+- Manual testing of Ralph Loop scripts (`init_project.py`, `archiver.py`).
+- Maintaining the "Surgical Protocol" via programmatic Policy Engine enforcement.
 
 ## Recent Changes
-- **Cleanup**: Legacy `prd.json` and `ralph-bg.sh` moved to `.bak` files.
-- **Alignment**: Surgically updated `agents/ralph.md` to use `tracker_*` tools and `update_topic`.
-- **Infrastructure**: Verified `settings.json` experimental flag is active.
-- **Attribution**: Codified the shift from STORY-IDs in JSON to native task IDs.
+- **Repository Setup**: Initialized and pushed `gemini-cli-agents` to GitHub.
+- **Surgical Protocol**: Implemented programmatic `write_file` restrictions in `policies/ralph-guardrails.toml`.
+- **Cleanup**: Surgically removed obsolete `verifier.py` while preserving `archiver.py`.
+- **Logic Sync**: Updated `ralph-loop.sh` to use the native Gemini CLI Task Tracker instead of `prd.json`.
 
 ## Upcoming Tasks (Iterative)
 1. **Bootstrap**: Create the first native task "Hello Ralph" via `tracker_create_task`.

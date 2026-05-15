@@ -10,14 +10,14 @@ YYYY-MM-DD HH:MM:SS - Log of updates made.
 
 *
 
-## Coding Patterns
+## System Standards
 
-*   
+### The Surgical Protocol
+- **Constraint**: `write_file` is strictly forbidden for existing project documentation.
+- **Enforcement**: Programmatic blocking via `ralph-guardrails.toml` (Policy Engine).
+- **Mandatory Tool**: All documentation updates MUST use the `replace` tool for atomic, surgical edits.
+- **Workflow**: `read_file` (target chunk) -> `replace` (surgical update).
 
-## Architectural Patterns
-
-*   
-
-## Testing Patterns
-
-*
+### Native Task Management
+- **Source of Truth**: The native Gemini CLI Task Tracker (`tracker_*`).
+- **Automation**: Scripts must query the CLI status rather than parsing local files like `prd.json`.

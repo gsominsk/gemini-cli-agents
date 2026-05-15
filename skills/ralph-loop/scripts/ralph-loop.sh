@@ -7,7 +7,6 @@ set -e
 # 1. Parse Arguments & Setup Paths
 MAX_ITERATIONS=${1:-10}
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PRD_FILE="prd.json"
 ARCHIVE_DIR="archive"
 LAST_BRANCH_FILE=".last-branch"
 PROGRESS_FILE="memory-bank/progress.md"
@@ -46,17 +45,21 @@ for i in $(seq 1 $MAX_ITERATIONS); do
     echo "  Iteration $i of $MAX_ITERATIONS"
     echo "---------------------------------------------------------------"
 
-    # Invoke the Ralph sub-agent natively. 
+    # Invoke the Ralph sub-agent natively.
     # In headless/autonomous mode, we use the CLI flags to ensure it doesn't wait for human OK.
-    gemini --prompt "@ralph Continue working on the next task in prd.json. Follow Memory Bank rituals." --approval-mode=all
+    gemini --prompt "@ralph Continue working on the next task using tracker tools. Follow Memory Bank rituals." --approval-mode=yolo
 
-    # Objective check of completion state in prd.json
-    if jq -e '.userStories | length > 0 and all(.passes == true)' "$PRD_FILE" > /dev/null; then
-        echo "SUCCESS: All tasks in prd.json are complete."
+
+    # Objective check of completion state via Native Tracker
+    # If no open tasks remain, we consider the loop successful.
+    OPEN_TASKS=$(gemini -p "tracker_list_tasks" | grep -c '"status": "open"' || echo "0")
+    
+    if [ "$OPEN_TASKS" == "0" ]; then
+        echo "SUCCESS: No open tasks remain in the native tracker."
         exit 0
     fi
 
-    echo "Iteration $i complete. Checking next task..."
+    echo "Iteration $i complete. Tasks still open: $OPEN_TASKS. Checking next task..."
 done
 
 echo "FAILURE: Reached max iterations ($MAX_ITERATIONS) without finishing all tasks."

@@ -14,12 +14,14 @@ Tracking the setup of the Gemini CLI environment.
 - [x] Standardize `skill-creator` and `skill-installer`.
 - [x] Migrate Roo Code patterns to `memory-bank` skill.
 - [x] Enable native `taskTracker` in `settings.json`.
-- [x] Decommission `prd.json` (moved to backup).
 - [x] Align Ralph Agent instructions with native tracker.
+- [x] Initialize and push `gemini-cli-agents` repository to GitHub.
+- [x] Implement programmatic "Surgical Protocol" via Policy Engine.
+- [x] Remove obsolete `verifier.py` script.
 
 ## Current Tasks
-- [ ] Initialize native Task Tracker with first story.
-- [ ] Run Ralph loop in background mode.
+- [ ] Manually test `archiver.py` script functionality.
+- [ ] Initialize native Task Tracker with first story for a test project.
 
 ## Next Steps
 - Implement "Hello Ralph" task autonomously.

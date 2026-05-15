@@ -29,27 +29,14 @@ def init_project(project_path):
                 f.write(content)
             print(f"Created: {file_path}")
 
-    # 3. Initialize prd.json
-    prd_path = os.path.join(project_path, "prd.json")
-    if not os.path.exists(prd_path):
-        initial_prd = {
-            "project": os.path.basename(project_path),
-            "branchName": "ralph/initial-setup",
-            "description": "Initial project setup and configuration",
-            "userStories": []
-        }
-        with open(prd_path, "w") as f:
-            json.dump(initial_prd, f, indent=2)
-        print(f"Initialized: {prd_path}")
-
-    # 4. Initialize AGENTS.md
+    # 3. Initialize AGENTS.md
     agents_path = os.path.join(project_path, "AGENTS.md")
     if not os.path.exists(agents_path):
         with open(agents_path, "w") as f:
-            f.write("# Codebase Knowledge\n\n## General Patterns\n- Use `ralph-loop` for task management.\n- Use `memory-bank/` for persistent context.\n")
+            f.write("# Codebase Knowledge\n\n## General Patterns\n- Use native Task Tracker for task management.\n- Use `memory-bank/` for persistent context.\n")
         print(f"Initialized: {agents_path}")
 
-    # 5. Initialize .last-branch for archiver logic
+    # 4. Initialize .last-branch for archiver logic
     last_branch_path = os.path.join(project_path, ".last-branch")
     if not os.path.exists(last_branch_path):
         with open(last_branch_path, "w") as f:

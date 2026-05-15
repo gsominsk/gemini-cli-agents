@@ -1,47 +1,21 @@
-# Ralph Agent Instructions
+# Codebase Knowledge & Agent Rules
 
-## Overview
+## General Standards
+- **Source of Truth**: The native Gemini CLI Task Tracker (`tracker_*`) is the primary source for task status.
+- **Persistence**: Use the `memory-bank/` directory for long-term project context.
+- **Surgical Protocol**: NEVER use `write_file` to edit existing documentation. ALWAYS use the `replace` tool for atomic, surgical updates to `AGENTS.md`, `GEMINI.md`, and `memory-bank/*.md`.
 
-Ralph is an autonomous AI agent loop that runs AI coding tools (Amp or Claude Code) repeatedly until all PRD items are complete. Each iteration is a fresh instance with clean context.
+## Ralph Loop Protocols
+- **Initialization**: Every task starts with the **Context Ritual** (reading `activeContext.md` and `progress.md`).
+- **Execution**: Implement only ONE task at a time. Maintain focus.
+- **Reality Check**: Run mandatory project checks (tests, lint, build) before marking a task as closed.
+- **Evolution**: Distill significant architectural learnings into this file (`AGENTS.md`) after completing a major task.
 
-## Commands
+## Multi-Agent Attribution
+Follow the `memory-bank` standard for all logs and updates:
+`[YYYY-MM-DD HH:MM:SS] [AgentName] - [Description]`
 
-```bash
-# Run the flowchart dev server
-cd flowchart && npm run dev
-
-# Build the flowchart
-cd flowchart && npm run build
-
-# Run Ralph with Amp (default)
-./ralph.sh [max_iterations]
-
-# Run Ralph with Claude Code
-./ralph.sh --tool claude [max_iterations]
-```
-
-## Key Files
-
-- `ralph.sh` - The bash loop that spawns fresh AI instances (supports `--tool amp` or `--tool claude`)
-- `prompt.md` - Instructions given to each AMP instance
--  `CLAUDE.md` - Instructions given to each Claude Code instance
-- `prd.json.example` - Example PRD format
-- `flowchart/` - Interactive React Flow diagram explaining how Ralph works
-
-## Flowchart
-
-The `flowchart/` directory contains an interactive visualization built with React Flow. It's designed for presentations - click through to reveal each step with animations.
-
-To run locally:
-```bash
-cd flowchart
-npm install
-npm run dev
-```
-
-## Patterns
-
-- Each iteration spawns a fresh AI instance (Amp or Claude Code) with clean context
-- Memory persists via git history, `progress.txt`, and `prd.json`
-- Stories should be small enough to complete in one context window
-- Always update AGENTS.md with discovered patterns for future iterations
+## Forbidden Actions
+- Do NOT use destructive commands like `rm` (unless explicitly asked).
+- Do NOT overwrite documentation files via `write_file`.
+- Do NOT skip the Reality Check ritual.

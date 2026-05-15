@@ -8,12 +8,17 @@
 **Rationale**: Ensures that specialized capabilities are available across all user projects (sandbox, katana, etc.) without duplication.
 **Implementation Details**: Using `~/.gemini/agents/` and `~/.gemini/skills/`.
 
-## Decision: Iterative Refinement of Ralph Agent Infrastructure
+## Decision: Programmatic Enforcement of "Surgical Protocol"
 **Date**: 2026-05-15
-**Rationale**: The initial implementation lacked critical "cleanup" (archiving) and "setup" (initialization) scripts found in the original Ralph pattern. Iterative refinement ensures that we don't break the working base while adding advanced features.
+**Rationale**: LLMs, especially weaker models, may accidentally overwrite critical documentation files when attempting to rewrite them. Programmatic enforcement at the tool level is more reliable than prompting alone.
 **Implementation Details**:
-- Adding `archiver.py` and `init_project.py` to `ralph-loop/scripts/`.
-- Enforcing `[Ralph]` attribution for all autonomous logs.
-- Integrating Memory Bank sync into the Ralph Loop "Evolution" ritual.
+- Added rules to `~/.gemini/policies/ralph-guardrails.toml` with `priority = 600`.
+- Denies `write_file` for `AGENTS.md`, `GEMINI.md`, `systemPatterns.md`, and `memory-bank/*`.
+- Mandates the use of the `replace` tool for these files.
+
+## Decision: Native Task Tracker Integration
+**Date**: 2026-05-15
+**Rationale**: Using the built-in Gemini CLI `tracker_*` tools reduces friction and eliminates the risk of "state drift" between local JSON files and the CLI's internal state.
+**Implementation Details**: Updated `ralph-loop.sh` to check for open tasks via native CLI queries.
 
 2026-05-15 12:00:00 - Initialized Decision Log.
